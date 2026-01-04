@@ -24,3 +24,4 @@ Features implemented
 - VR experience using A-Frame with remote fallback scene
 - Vite dev proxy for `/api` to backend
 # Moodverse_rakshitha
+# Moodverse
