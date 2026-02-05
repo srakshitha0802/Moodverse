@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moodverse - VR Relaxation Rooms</title>
+    <meta name="description" content="Immersive 360° VR mental health experience with calming environments" />
+    <meta name="theme-color" content="#0f172a" />
+    
+    <!-- Security Headers via Meta Tags (where supported) -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    
+    <!-- Content Security Policy -->
+    <!-- 
+      This CSP is restrictive to prevent XSS attacks while allowing:
+      - A-Frame library from cdn.aframe.io
+      - Image assets from whitelisted domains
+      - Audio from trusted sources
+      - Inline styles and scripts for A-Frame functionality
+    -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://aframe.io https://cdn.jsdelivr.net https://unpkg.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      img-src 'self' data: https: blob:;
+      media-src 'self' data: https: blob:;
+      audio-src 'self' data: https: blob:;
+      connect-src 'self' https:;
+      frame-src 'self' https://aframe.io;
+      worker-src 'self' blob:;
+    " />
+    
+    <!-- Preconnect to external resources for faster loading -->
+    <link rel="preconnect" href="https://aframe.io" />
+    <link rel="preconnect" href="https://cdn.aframe.io" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- 
+      A-Frame VR Library - Core framework for WebVR/WebXR
+      Version 1.4.2 - Stable release with full WebXR support
+      Loaded asynchronously for better performance
+    -->
+    <script async src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    
+    <!-- 
+      A-Frame Environment Component - For enhanced HDRI lighting and environments
+      This enables realistic lighting using HDRI maps
+    -->
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
+    
+    <!-- 
+      A-Frame Extras - Additional controls and components for better VR experience
+      Includes improved camera controls, animation support, and more
+    -->
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- 
+      VR Room Security Initialization
+      This script runs immediately to establish security context
+    -->
+    <script>
+      (function() {
+        // Prevent clickjacking
+        if (top !== self) {
+          top.location = self.location;
+        }
+        
+        // Report CSP violations (non-intrusive)
+        document.addEventListener('securitypolicyviolation', function(e) {
+          console.warn('[CSP Violation]', {
+            blockedURI: e.blockedURI,
+            violatedDirective: e.violatedDirective,
+            originalPolicy: e.originalPolicy
+          });
+        });
+        
+        // Detect VR capability
+        window.__VR_CAPABLE = false;
+        if (navigator.xr) {
+          navigator.xr.isSessionSupported('immersive-vr').then(function(supported) {
+            window.__VR_CAPABLE = supported;
+            console.info('[VR] WebXR VR support:', supported);
+          }).catch(function(err) {
+            console.info('[VR] WebXR not available:', err);
+          });
+        }
+        
+        console.info('[Moodverse] VR Rooms initialized with security policies');
+      })();
+    </script>
+  </body>
+</html>
+

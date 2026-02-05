@@ -1,0 +1,13 @@
+/**
+ * VrRooms.css - Page wrapper styles for VR Rooms
+ */
+
+.vr-rooms-page {
+  min-height: 100vh;
+  background: #0f172a;
+}
+
+.vr-rooms-page * {
+  box-sizing: border-box;
+}
+

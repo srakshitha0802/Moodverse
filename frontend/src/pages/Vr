@@ -1,0 +1,199 @@
+import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import '../advanced-home.css';
+
+const VR_ENVIRONMENTS = [
+  { id: 'beach', name: 'Beach', description: 'Ocean waves and sunset', mood: ['Relaxation', 'Peace'], category: 'Nature' },
+  { id: 'forest', name: 'Forest', description: 'Peaceful woodland', mood: ['Calm', 'Nature'], category: 'Nature' },
+  { id: 'mountains', name: 'Mountains', description: 'Alpine peaks and clarity', mood: ['Clarity', 'Inspiration'], category: 'Nature' },
+  { id: 'space', name: 'Space', description: 'Cosmic wonder', mood: ['Wonder', 'Peace'], category: 'Space' },
+  { id: 'garden', name: 'Zen Garden', description: 'Meditation garden', mood: ['Meditation', 'Peace'], category: 'Nature' },
+  { id: 'ocean', name: 'Ocean', description: 'Gentle waves', mood: ['Relaxation', 'Sleep'], category: 'Nature' },
+  { id: 'sunset', name: 'Sunset', description: 'Peaceful sunset', mood: ['Peace', 'Romance'], category: 'Nature' },
+  { id: 'aurora', name: 'Aurora', description: 'Northern lights', mood: ['Magic', 'Wonder'], category: 'Space' },
+  { id: 'sakura', name: 'Sakura', description: 'Cherry blossoms', mood: ['Joy', 'Beauty'], category: 'Nature' },
+  { id: 'bamboo', name: 'Bamboo', description: 'Bamboo forest', mood: ['Calm', 'Harmony'], category: 'Nature' }
+];
+
+const MOOD_FILTERS = ['all', 'Relaxation', 'Peace', 'Calm', 'Meditation', 'Nature', 'Wonder', 'Sleep'];
+
+function getVRBackground(id: string): string {
+  const colors: Record<string, string> = {
+    beach: 'linear-gradient(180deg, #87CEEB 0%, #FFD700 50%, #FFA500 60%, #00BFFF 60%, #000080 100%)',
+    forest: 'linear-gradient(180deg, #87CEEB 0%, #98D8AA 50%, #228B22 50%, #006400 100%)',
+    mountains: 'linear-gradient(180deg, #4A90D9 0%, #87CEEB 50%, #696969 50%, #A9A9A9 100%)',
+    space: 'linear-gradient(180deg, #1a1a2e 0%, #0d0d1a 100%)',
+    garden: 'linear-gradient(180deg, #FFF8DC 0%, #DEB887 100%)',
+    ocean: 'linear-gradient(180deg, #FF6B6B 0%, #FFE66D 50%, #4ECDC4 50%, #0077BE 100%)',
+    sunset: 'linear-gradient(180deg, #2C3E50 0%, #E74C3C 30%, #F39C12 60%, #9B59B6 100%)',
+    aurora: 'linear-gradient(180deg, #0a0a1a 0%, #1a1a3a 100%)',
+    sakura: 'linear-gradient(180deg, #FFB7C5 0%, #FFE4E1 100%)',
+    bamboo: 'linear-gradient(180deg, #1a2a1a 0%, #2d4a2d 50%, #1a2a1a 100%)'
+  };
+  return colors[id] || colors.beach;
+}
+
+export default function VrRooms() {
+  const [searchParams] = useSearchParams();
+  const sceneId = searchParams.get('scene') || undefined;
+  const [selectedMood, setSelectedMood] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showVR, setShowVR] = useState(!!sceneId);
+  const [currentScene, setCurrentScene] = useState<string | null>(sceneId || null);
+
+  const filteredEnvironments = VR_ENVIRONMENTS.filter(env => {
+    const matchesMood = selectedMood === 'all' || env.mood.includes(selectedMood);
+    const matchesSearch = env.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         env.description.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesMood && matchesSearch;
+  });
+
+  const enterVR = (env: typeof VR_ENVIRONMENTS[0]) => {
+    setCurrentScene(env.id);
+    setShowVR(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const exitVR = () => {
+    setShowVR(false);
+    setCurrentScene(null);
+  };
+
+  return (
+    <div className="vr-rooms-page">
+      <header className="vr-header">
+        <div className="vr-header-content">
+          <h1>VR Relaxation Rooms</h1>
+          <p>Immersive 360 environments for meditation and relaxation</p>
+          <div className="vr-stats">
+            <span>{VR_ENVIRONMENTS.length} Environments</span>
+            <span>100% Free</span>
+            <span>Works Offline</span>
+          </div>
+      </header>
+
+      {showVR && currentScene && (
+        <section className="vr-viewer-section">
+          <div className="viewer-header">
+            <div className="viewer-info">
+              <h2>VR Experience</h2>
+              <p>Drag to look around</p>
+            </div>
+            <button className="close-viewer-btn" onClick={exitVR}>Exit VR</button>
+          </div>
+          <div className="vr-viewer-container">
+            <div className="vr-scene-display" style={{ background: getVRBackground(currentScene) }}>
+              <div className="vr-scene-content">
+                <h3>{VR_ENVIRONMENTS.find(e => e.id === currentScene)?.name}</h3>
+                <p>{VR_ENVIRONMENTS.find(e => e.id === currentScene)?.description}</p>
+              </div>
+          </div>
+        </section>
+      )}
+
+      {!showVR && (
+        <section className="vr-controls">
+          <div className="search-container">
+            <span className="search-icon">🔍</span>
+            <input
+              type="text"
+              placeholder="Search environments..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="search-input"
+            />
+          </div>
+          <div className="mood-filters">
+            {MOOD_FILTERS.map(mood => (
+              <button
+                key={mood}
+                className={`mood-btn ${selectedMood === mood ? 'active' : ''}`}
+                onClick={() => setSelectedMood(mood)}
+              >
+                {mood === 'all' ? 'All' : mood}
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {!showVR && (
+        <section className="environments-section">
+          <div className="environments-header">
+            <h2>Choose Your Space</h2>
+            <p>{filteredEnvironments.length} immersive environments</p>
+          </div>
+          <div className="environments-grid">
+            {filteredEnvironments.map(env => (
+              <div
+                key={env.id}
+                className="environment-card"
+                onClick={() => enterVR(env)}
+              >
+                <div className="card-image-container" style={{ background: getVRBackground(env.id) }}>
+                  <div className="card-placeholder">
+                    <span className="placeholder-icon">
+                      {env.id === 'beach' && '🏖️'}
+                      {env.id === 'forest' && '🌲'}
+                      {env.id === 'mountains' && '🏔️'}
+                      {env.id === 'space' && '✨'}
+                      {env.id === 'garden' && '🎋'}
+                      {env.id === 'ocean' && '🌊'}
+                      {env.id === 'sunset' && '🌅'}
+                      {env.id === 'aurora' && '🌌'}
+                      {env.id === 'sakura' && '🌸'}
+                      {env.id === 'bamboo' && '🎍'}
+                    </span>
+                  </div>
+                  <div className="card-overlay">
+                    <span className="enter-vr-btn">Enter VR</span>
+                  </div>
+                  <span className="environment-category">{env.category}</span>
+                </div>
+                <div className="card-content">
+                  <h3>{env.name}</h3>
+                  <p className="card-description">{env.description}</p>
+                  <div className="mood-tags">
+                    {env.mood.map((m, i) => (
+                      <span key={i} className="mood-tag">{m}</span>
+                    ))}
+                  </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {!showVR && (
+        <section className="vr-instructions">
+          <h2>How to Use</h2>
+          <div className="instructions-grid">
+            <div className="instruction-card">
+              <div className="instruction-icon">🖱️</div>
+              <h4>Desktop</h4>
+              <p>Click and drag to look around</p>
+            </div>
+            <div className="instruction-card">
+              <div className="instruction-icon">📱</div>
+              <h4>Mobile</h4>
+              <p>Tilt phone to explore</p>
+            </div>
+            <div className="instruction-card">
+              <div className="instruction-icon">🥽</div>
+              <h4>VR Headset</h4>
+              <p>Full immersion experience</p>
+            </div>
+            <div className="instruction-card">
+              <div className="instruction-icon">🎧</div>
+              <h4>Audio</h4>
+              <p>Use headphones for ambiance</p>
+            </div>
+          <div className="safety-reminder">
+            <h4>Wellness Note</h4>
+            <p>Take breaks every 15-20 minutes</p>
+          </div>
+        </section>
+      )}
+    </div>
+  );
+}
