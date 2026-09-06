@@ -1,0 +1,27 @@
+{
+  "short_name": "Moodverse",
+  "name": "Moodverse — Mindful Wellness & AI Mood Tracker",
+  "description": "All-in-one mindfulness and mental wellness platform featuring AI mood detection, 25 anti-stress games, guided breathwork meditation, yoga postures, wholesome memes, and 3D VR sanctuaries.",
+  "icons": [
+    {
+      "src": "/assets/icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#FAF9F6",
+  "theme_color": "#FAF9F6",
+  "display": "standalone",
+  "orientation": "portrait",
+  "categories": [
+    "health",
+    "lifestyle",
+    "medical"
+  ]
+}

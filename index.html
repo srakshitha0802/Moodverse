@@ -1,79 +1,151 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Moodverse - VR Relaxation Rooms</title>
-    <meta name="description" content="Immersive 360° VR mental health experience with calming environments" />
-    <meta name="theme-color" content="#FAF9F6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     
-    <!-- Security Headers via Meta Tags (where supported) -->
+    <!-- Primary SEO Meta Tags -->
+    <title>Moodverse — AI Mood Scanner, Mindful Games & Mental Wellness App</title>
+    <meta name="title" content="Moodverse — AI Mood Scanner, Mindful Games & Mental Wellness App" />
+    <meta name="description" content="Moodverse is an all-in-one mindful mental wellness platform featuring real-time AI facial & questionnaire mood scanning, 25 anti-stress relaxing games, guided meditation breathwork, curated yoga postures, 3D VR sanctuaries, and wholesome memes." />
+    <meta name="keywords" content="mental wellness, AI mood scanner, facial emotion analysis, anti-stress games, guided meditation, box breathing, yoga postures, Sukhasana, wholesome memes, 3D VR sanctuary, mindfulness app, Expo Go, React Native, stress relief" />
+    <meta name="author" content="Moodverse Team" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://moodverse.app/" />
+
+    <!-- Theme & Mobile App PWA Meta -->
+    <meta name="theme-color" content="#FAF9F6" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Moodverse" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.png" />
+    <link rel="apple-touch-icon" href="/assets/icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://moodverse.app/" />
+    <meta property="og:site_name" content="Moodverse" />
+    <meta property="og:title" content="Moodverse — AI Mood Scanner, Mindful Games & Mental Wellness App" />
+    <meta property="og:description" content="Empower your emotional well-being with real-time AI mood scanning, 25 sensory anti-stress games, guided breathwork meditation, yoga poses, and soothing VR sanctuaries." />
+    <meta property="og:image" content="https://moodverse.app/assets/icon.png" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://moodverse.app/" />
+    <meta name="twitter:title" content="Moodverse — AI Mood Scanner, Mindful Games & Mental Wellness App" />
+    <meta name="twitter:description" content="Discover your calm with AI mood scanning, 25 anti-stress games, guided meditation, yoga, and 3D VR rooms on Moodverse." />
+    <meta name="twitter:image" content="https://moodverse.app/assets/icon.png" />
+
+    <!-- Security Headers via Meta Tags -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    
-    <!-- Fonts -->
+
+    <!-- Structured Data (JSON-LD) for Search Engine Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://moodverse.app/#webapp",
+          "name": "Moodverse",
+          "url": "https://moodverse.app/",
+          "description": "Mindful mental wellness application featuring dual-mode AI mood detection, 25 sensory anti-stress games, guided meditation breathwork, yoga postures, wholesome memes, and 3D VR relaxation rooms.",
+          "applicationCategory": "HealthApplication",
+          "operatingSystem": "All (Web, iOS, Android)",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "featureList": [
+            "Real-time AI Facial Emotion & Questionnaire Mood Scanner",
+            "25 Relaxing Anti-Stress Tactile Games",
+            "Guided Meditation with 5 Breathing Patterns (Box, Belly, 4-6, Diaphragmatic, Extended Exhale)",
+            "Curated Yoga Postures with timers and step-by-step guidance",
+            "3D Virtual Reality (VR) 360 Relaxation Sanctuaries",
+            "Wholesome Mood Booster Memes Corner with 5 categories",
+            "Mindful Reflection Journal & Calming Music Soundscapes"
+          ],
+          "browserRequirements": "Requires JavaScript. Requires WebGL for VR rooms."
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://moodverse.app/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is Moodverse?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Moodverse is a comprehensive mental wellness and mindfulness application combining real-time AI mood detection, sensory relaxation games, guided breathwork meditation, yoga sequences, and immersive 3D VR sanctuaries in a soothing pastel environment."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does the AI Mood Scanner work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Moodverse provides dual-mode mood analysis: an interactive biometric facial scanner that measures micro-expressions (forehead engagement, eye smiles, lip curvature) and an in-depth multi-factor questionnaire assessing energy, cognitive clarity, tension, and social drive."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What relaxing anti-stress games are available?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Moodverse includes 25 tactile anti-stress games including Tension Bubble Pop, Calm Acoustic Piano, Zen Garden Pattern Rake, Gratitude Breathing Jar, Affirmation Match, Color Flow, and more."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I practice yoga and breathing exercises on Moodverse?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! Moodverse provides step-by-step guided yoga postures such as Sukhasana (Easy Pose), Viparita Karani (Legs-Up-the-Wall), Paschimottanasana, Setu Bandhasana (Bridge Pose), along with 5 guided breathing patterns with interactive visual timers."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Fonts with Preconnect and font-display: swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
     
     <!-- 
-      A-Frame VR Library - Core framework for WebVR/WebXR
-      Version 1.4.2 - Stable release with full WebXR support
-      Loaded asynchronously for better performance
+      A-Frame WebXR VR Framework (Loaded with defer for CWV/LCP optimization)
     -->
-    <script async src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    
-    <!-- 
-      A-Frame Environment Component - For enhanced HDRI lighting and environments
-      This enables realistic lighting using HDRI maps
-    -->
-    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
-    
-    <!-- 
-      A-Frame Extras - Additional controls and components for better VR experience
-      Includes improved camera controls, animation support, and more
-    -->
-    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
+    <script defer src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/c-frame/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
   </head>
   <body>
+    <!-- Skip to main content link for screen-reader and keyboard accessibility -->
+    <a href="#root" class="sr-only-skip">Skip to main content</a>
+    
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     
-    <!-- 
-      VR Room Security Initialization
-      This script runs immediately to establish security context
-    -->
+    <!-- VR Security & Capability Detection -->
     <script>
       (function() {
-        // Prevent clickjacking
         if (top !== self) {
           top.location = self.location;
         }
-        
-        // Report CSP violations (non-intrusive)
-        document.addEventListener('securitypolicyviolation', function(e) {
-          console.warn('[CSP Violation]', {
-            blockedURI: e.blockedURI,
-            violatedDirective: e.violatedDirective,
-            originalPolicy: e.originalPolicy
-          });
-        });
-        
-        // Detect VR capability
         window.__VR_CAPABLE = false;
         if (navigator.xr) {
           navigator.xr.isSessionSupported('immersive-vr').then(function(supported) {
             window.__VR_CAPABLE = supported;
-            console.info('[VR] WebXR VR support:', supported);
-          }).catch(function(err) {
-            console.info('[VR] WebXR not available:', err);
-          });
+          }).catch(function() {});
         }
-        
-        console.info('[Moodverse] VR Rooms initialized with security policies');
       })();
     </script>
   </body>
 </html>
-

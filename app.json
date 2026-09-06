@@ -5,12 +5,12 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#121420"
+      "backgroundColor": "#FAF9F6"
     },
     "ios": {
       "supportsTablet": true,
@@ -19,13 +19,20 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#121420"
+        "backgroundColor": "#FAF9F6"
       },
       "package": "com.moodverse.app"
     },
     "web": {
       "favicon": "./assets/favicon.png",
-      "bundler": "metro"
+      "bundler": "metro",
+      "name": "Moodverse — AI Mood Scanner & Mindful Wellness",
+      "shortName": "Moodverse",
+      "description": "Mindful mental wellness mobile application featuring AI mood detection, 25 anti-stress relaxing games, guided meditation breathwork, and yoga postures.",
+      "themeColor": "#FAF9F6",
+      "backgroundColor": "#FAF9F6",
+      "display": "standalone",
+      "orientation": "portrait"
     },
     "plugins": [
       "expo-status-bar"

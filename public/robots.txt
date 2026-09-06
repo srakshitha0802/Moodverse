@@ -1,0 +1,6 @@
+# robots.txt for Moodverse (https://moodverse.app)
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://moodverse.app/sitemap.xml

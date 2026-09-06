@@ -10,7 +10,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "build:expo": "expo export -p web",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@expo/metro-runtime": "^57.0.15",
