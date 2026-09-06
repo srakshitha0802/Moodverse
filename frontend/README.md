@@ -1,2 +1,0 @@
-# moodverse
-# moodverse-india

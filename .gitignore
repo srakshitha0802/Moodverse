@@ -1,7 +1,31 @@
+# Dependencies
 node_modules/
+
+# Expo & Metro
+.expo/
+web-build/
 dist/
+test-results/
+
+# Native builds
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Environment variables
 .env
 .env.local
-/.idea
-.vscode
-.DS_Store
+.env*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

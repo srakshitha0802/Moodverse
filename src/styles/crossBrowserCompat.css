@@ -1,0 +1,1041 @@
+/**
+ * Cross-Browser Compatibility Styles
+ * 
+ * These styles ensure consistent rendering and behavior across browsers:
+ * - Touch-friendly controls for mobile devices
+ * - VR experience styling
+ * - Permission request overlays
+ * - Error and warning banners
+ */
+
+/* ==========================================================================
+   VR Experience Container
+   ========================================================================== */
+
+.vr-experience-container {
+  position: relative;
+  width: 100%;
+  /* Mobile-first: use viewport units for flexible minimum height */
+  min-height: 30vh;
+  display: block;
+}
+
+/* Fallback container styling (used when WebGL is unavailable) */
+.vr-fallback-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 30vh;
+  background: #0f172a;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  color: white;
+}
+
+.vr-experience-container .a-scene {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================================
+   Permission Request Overlay
+   ========================================================================== */
+
+.vr-permission-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  border-radius: 12px;
+}
+
+.vr-permission-card {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+  width: min(92%, 420px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.vr-permission-card p {
+  color: #475569;
+  margin-bottom: 12px;
+}
+
+.vr-permission-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.permission-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.vr-permission-card h3 {
+  margin: 0 0 12px 0;
+  color: #1e293b;
+  font-size: 24px;
+}
+
+.vr-permission-card p {
+  margin: 0 0 24px 0;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Error and Warning Banners
+   ========================================================================== */
+
+.vr-error-banner,
+.vr-warning-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.vr-error-banner {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+}
+
+.vr-warning-banner {
+  background: #fefce8;
+  border: 1px solid #fef08a;
+  color: #ca8a04;
+}
+
+.vr-error-banner button,
+.vr-warning-banner button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 12px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.vr-error-banner button:hover,
+.vr-warning-banner button:hover {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Controls Hint
+   ========================================================================== */
+
+.vr-controls-hint {
+  background: rgba(15, 23, 42, 0.8);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.vr-controls-hint p {
+  margin: 4px 0;
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   Fallback Controls Panel
+   ========================================================================== */
+
+.vr-fallback-controls {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.vr-fallback-controls h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: #475569;
+}
+
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* ==========================================================================
+   VR Loading Container
+   ========================================================================== */
+
+.vr-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Use viewport height so the loading area scales on mobile and desktop */
+  min-height: 30vh;
+  background: #0f172a;
+  border-radius: 12px;
+  color: white;
+}
+
+.vr-loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(107, 211, 199, 0.3);
+  border-top-color: #6BD3C7;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.vr-loading-container p {
+  margin-top: 16px;
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   Security Banner
+   ========================================================================== */
+
+.security-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  color: #16a34a;
+  font-size: 14px;
+}
+
+.security-icon {
+  font-size: 20px;
+}
+
+.security-banner button {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #16a34a;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.security-banner button:hover {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Error Banner
+   ========================================================================== */
+
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  color: #dc2626;
+  font-size: 14px;
+}
+
+.error-icon {
+  font-size: 20px;
+}
+
+.error-banner button {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #dc2626;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.error-banner button:hover {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   VR Viewer Section
+   ========================================================================== */
+
+.vr-viewer-section {
+  margin-bottom: 32px;
+}
+
+.viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.viewer-info h2 {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  color: #1e293b;
+}
+
+.viewer-info p {
+  margin: 0 0 12px 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.scene-moods {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mood-badge {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.viewer-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.control-btn {
+  padding: 8px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.control-btn:hover {
+  background: #f8fafc;
+}
+
+.control-btn.active {
+  background: #6BD3C7;
+  border-color: #6BD3C7;
+  color: white;
+}
+
+.control-btn.exit-btn {
+  background: #fee2e2;
+  border-color: #fecaca;
+  color: #dc2626;
+}
+
+.control-btn.exit-btn:hover {
+  background: #fecaca;
+}
+
+/* ==========================================================================
+   VR Viewer Container
+   ========================================================================== */
+
+.vr-viewer-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.aframe-scene-container {
+  width: 100%;
+  /* Prefer viewport-based height with an upper bound so the scene scales sensibly */
+  height: min(80vh, 800px);
+  max-height: 90vh;
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .aframe-scene-container {
+    height: min(55vh, 500px);
+  }
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+  .aframe-scene-container {
+    height: min(65vh, 700px);
+  }
+}
+
+@media (min-width: 1025px) {
+  .aframe-scene-container {
+    height: min(75vh, 900px);
+  }
+}
+
+/* ==========================================================================
+   VR Instructions Overlay
+   ========================================================================== */
+
+.vr-instructions-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  cursor: pointer;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.vr-instructions-card {
+  background: white;
+  padding: 32px;
+  border-radius: 16px;
+  max-width: 480px;
+  width: 90%;
+  cursor: default;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.vr-instructions-card h3 {
+  margin: 0 0 24px 0;
+  font-size: 20px;
+  color: #1e293b;
+}
+
+.instruction-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.step-icon {
+  font-size: 24px;
+  width: 40px;
+  text-align: center;
+}
+
+.step span {
+  font-size: 14px;
+  color: #475569;
+}
+
+.step strong {
+  color: #1e293b;
+}
+
+/* ==========================================================================
+   Environment Navigation
+   ========================================================================== */
+
+.environment-nav {
+  margin-top: 24px;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+.environment-nav h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  color: #475569;
+}
+
+.nav-thumbnails {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.nav-thumbnail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 80px;
+}
+
+.nav-thumbnail:hover {
+  border-color: #6BD3C7;
+  background: #f0fdfa;
+}
+
+.nav-thumbnail.active {
+  border-color: #6BD3C7;
+  background: #f0fdfa;
+}
+
+.thumb-icon {
+  font-size: 24px;
+}
+
+.thumb-name {
+  font-size: 12px;
+  color: #475569;
+  text-align: center;
+}
+
+/* ==========================================================================
+   VR Room Container
+   ========================================================================== */
+
+.vr-room-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.vr-header {
+  text-align: center;
+  padding: 48px 24px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-radius: 16px;
+  margin-bottom: 32px;
+  color: white;
+}
+
+.vr-header-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.vr-header-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.pulse-glow {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.vr-header h1 {
+  margin: 0 0 12px 0;
+  font-size: 36px;
+  background: linear-gradient(135deg, #6BD3C7, #4ade80);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.vr-header p {
+  margin: 0 0 24px 0;
+  opacity: 0.8;
+  font-size: 18px;
+}
+
+.vr-stats {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.stat-badge {
+  background: rgba(107, 211, 199, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: #6BD3C7;
+}
+
+.security-info {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   VR Controls
+   ========================================================================== */
+
+.vr-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  opacity: 0.5;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 16px 12px 48px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #6BD3C7;
+}
+
+.mood-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mood-btn {
+  padding: 8px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  animation: slideUp 0.3s ease backwards;
+}
+
+.mood-btn:hover {
+  border-color: #6BD3C7;
+  background: #f0fdfa;
+}
+
+.mood-btn.active {
+  background: #6BD3C7;
+  border-color: #6BD3C7;
+  color: white;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Environments Section
+   ========================================================================== */
+
+.environments-section {
+  margin-bottom: 32px;
+}
+
+.environments-header {
+  margin-bottom: 24px;
+}
+
+.environments-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  color: #1e293b;
+}
+
+.environments-header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.environments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.environment-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.3s;
+  animation: slideUp 0.4s ease backwards;
+}
+
+.environment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.card-image-container {
+  position: relative;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.environment-card:hover .card-image {
+  transform: scale(1.05);
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.environment-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.enter-vr-btn {
+  background: #6BD3C7;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.environment-category {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(15, 23, 42, 0.8);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-content h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  color: #1e293b;
+}
+
+.card-description {
+  margin: 0 0 16px 0;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.mood-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mood-tag {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+/* ==========================================================================
+   No Results
+   ========================================================================== */
+
+.no-results {
+  text-align: center;
+  padding: 48px 24px;
+  background: #f8fafc;
+  border-radius: 16px;
+}
+
+.no-results h3 {
+  margin: 0 0 8px 0;
+  color: #475569;
+}
+
+.no-results p {
+  margin: 0 0 24px 0;
+  color: #64748b;
+}
+
+/* ==========================================================================
+   VR Instructions
+   ========================================================================== */
+
+.vr-instructions {
+  padding: 32px;
+  background: #f8fafc;
+  border-radius: 16px;
+  margin-bottom: 32px;
+}
+
+.vr-instructions h2 {
+  margin: 0 0 24px 0;
+  font-size: 24px;
+  color: #1e293b;
+  text-align: center;
+}
+
+.instructions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.instruction-card {
+  text-align: center;
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.instruction-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.instruction-card h4 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #1e293b;
+}
+
+.instruction-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.safety-reminder {
+  text-align: center;
+  padding: 20px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+}
+
+.safety-reminder h4 {
+  margin: 0 0 8px 0;
+  color: #c2410c;
+  font-size: 14px;
+}
+
+.safety-reminder p {
+  margin: 0;
+  color: #9a3412;
+  font-size: 13px;
+}
+
+/* ==========================================================================
+   VR Footer
+   ========================================================================== */
+
+.vr-footer {
+  text-align: center;
+  padding: 32px 24px;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 32px;
+}
+
+.security-badges {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.security-badges span {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.vr-footer p {
+  margin: 0;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+/* ==========================================================================
+   VR Grid & Cards
+   ========================================================================== */
+
+.vr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.vr-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.vr-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.vr-badge {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  background: #f1f5f9;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+/* ==========================================================================
+   Responsive Styles
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .vr-header {
+    padding: 32px 16px;
+  }
+
+  .vr-header h1 {
+    font-size: 28px;
+  }
+
+  .viewer-header {
+    flex-direction: column;
+  }
+
+  .aframe-scene-container {
+    height: 400px;
+  }
+
+  .controls-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vr-instructions-card {
+    padding: 24px;
+  }
+
+  .environments-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vr-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+  .vr-permission-overlay,
+  .vr-instructions-overlay,
+  .security-banner,
+  .error-banner {
+    display: none !important;
+  }
+
+  .aframe-scene-container {
+    display: none;
+  }
+}
+
+
