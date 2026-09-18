@@ -136,13 +136,13 @@ const MEDITATION_VIDEOS = [
     channel: 'Sleep Music'
   },
   {
-    id: 'z6X5oEIg6Ak',
+    id: 'inpok4MKVLM',
     title: 'Stress Relief Meditation',
     description: 'Release tension and find your center with this calming meditation for stress relief.',
     duration: '15:00',
     category: 'Stress Relief',
-    thumbnail: 'https://img.youtube.com/vi/z6X5oEIg6Ak/maxresdefault.jpg',
-    channel: 'Relaxing Music'
+    thumbnail: 'https://img.youtube.com/vi/inpok4MKVLM/maxresdefault.jpg',
+    channel: 'Goodful'
   },
 ];
 
@@ -486,7 +486,7 @@ function BreathingExercise() {
   useEffect(() => {
     if (!isActive) return;
 
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setTimeout>;
     
     if (phase === 'inhale') {
       setCount(4);

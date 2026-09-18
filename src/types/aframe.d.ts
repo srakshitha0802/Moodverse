@@ -5,9 +5,11 @@
  * used in the Moodverse VR Rooms application.
  */
 
-declare namespace JSX {
-  // Core A-Frame components
-  interface IntrinsicElements {
+import 'react';
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
     // Scene and Assets
     'a-scene': any;
     'a-assets': any;
@@ -66,6 +68,7 @@ declare namespace JSX {
     'audio-player': any;
     'vr-scene': any;
   }
+}
 }
 
 // Extend Window interface for A-Frame

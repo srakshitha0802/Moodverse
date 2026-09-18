@@ -11,7 +11,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import { AppHeader } from '../navigation/AppNavigator';
+import { AppHeader } from '../components/AppHeader';
 
 export interface BreathworkExercise {
   id: number;

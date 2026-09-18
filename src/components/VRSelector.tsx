@@ -199,7 +199,7 @@ function isIOS13OrHigher(): boolean {
 function requiresOrientationPermission(): boolean {
   if (typeof DeviceOrientationEvent === 'undefined') return false;
   // iOS 13+ requires permission
-  return typeof DeviceOrientationEvent.requestPermission === 'function';
+  return typeof (DeviceOrientationEvent as any).requestPermission === 'function';
 }
 
 interface VRSelectorProps {
@@ -310,7 +310,7 @@ export default function VRSelector({ initial }: VRSelectorProps) {
     }
 
     try {
-      const permission = await DeviceOrientationEvent.requestPermission();
+      const permission = await (DeviceOrientationEvent as any).requestPermission();
       if (permission === 'granted') {
         setPermissionGranted(true);
         setPermissionError(null);

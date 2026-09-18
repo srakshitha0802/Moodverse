@@ -189,16 +189,25 @@ header.site-header {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: linear-gradient(135deg, #0284C7 0%, #6366F1 100%);
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #FFFFFF;
-  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.18);
   transition: var(--transition-fast);
 }
+.brand-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+}
 .brand-logo:hover .brand-icon-wrapper {
-  transform: rotate(6deg) scale(1.05);
+  transform: rotate(4deg) scale(1.05);
 }
 
 .brand-badge {
@@ -864,3 +873,253 @@ footer.site-footer {
     display: none;
   }
 }
+
+/* ==========================================================================
+   ZEN HEADER PILLS & INSTANT STRESS RESCUE
+   ========================================================================== */
+.header-stress-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--brand-teal);
+  background: var(--pastel-sage);
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  font-family: inherit;
+}
+.header-stress-pill:hover {
+  background: #A7F3D0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.header-sound-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand-primary);
+  background: var(--pastel-sky);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  font-family: inherit;
+}
+.header-sound-pill.active {
+  background: var(--brand-primary);
+  color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(2, 132, 199, 0.35);
+}
+.header-sound-pill:hover {
+  transform: translateY(-1px);
+}
+
+.sound-dropdown-card {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 260px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+.sound-option-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  background: #F8FAFC;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+.sound-option-btn:hover {
+  background: var(--pastel-sky);
+  color: var(--brand-primary);
+  border-color: rgba(2, 132, 199, 0.2);
+}
+.sound-option-btn.selected {
+  background: var(--pastel-sky);
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+.sound-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+}
+
+.sound-stop-btn {
+  margin-top: 6px;
+  width: 100%;
+  padding: 8px;
+  background: #FEE2E2;
+  color: #DC2626;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+.sound-stop-btn:hover {
+  background: #FECACA;
+}
+
+/* Stress Rescue Modal */
+.stress-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.25s ease;
+}
+
+.stress-modal-card {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 36px 28px;
+  max-width: 540px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+  animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stress-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  background: #F8FAFC;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: var(--transition-fast);
+}
+.stress-modal-close:hover {
+  background: #F1F5F9;
+  color: var(--text-primary);
+}
+
+.stress-modal-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--brand-teal);
+  background: var(--pastel-sage);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.stress-breathe-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 32px 0;
+  height: 200px;
+}
+
+.stress-breathe-orb {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 4s ease-in-out;
+  box-shadow: 0 0 40px rgba(14, 165, 233, 0.3);
+}
+
+.stress-breathe-orb.inhale {
+  transform: scale(1.4);
+  background: radial-gradient(circle, #38BDF8 0%, #0284C7 100%);
+  color: #FFFFFF;
+  transition-duration: 4s;
+}
+
+.stress-breathe-orb.hold {
+  transform: scale(1.4);
+  background: radial-gradient(circle, #818CF8 0%, #6366F1 100%);
+  color: #FFFFFF;
+  transition-duration: 7s;
+}
+
+.stress-breathe-orb.exhale {
+  transform: scale(1.0);
+  background: radial-gradient(circle, #34D399 0%, #059669 100%);
+  color: #FFFFFF;
+  transition-duration: 8s;
+}
+
+.stress-breathe-phase-text {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.stress-breathe-timer {
+  font-size: 24px;
+  font-weight: 800;
+  opacity: 0.9;
+}
+
+.stress-tip-pill {
+  font-size: 12px;
+  background: #F8FAFC;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+

@@ -13,7 +13,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import { AppHeader } from '../navigation/AppNavigator';
+import { AppHeader } from '../components/AppHeader';
 
 interface JournalMoodOption {
   id: string;

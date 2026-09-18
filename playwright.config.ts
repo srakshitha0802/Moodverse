@@ -7,7 +7,7 @@ export default defineConfig({
   fullyParallel: false,
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    baseURL: 'http://localhost:5173',
+    baseURL: 'http://localhost:8100',
     headless: true,
     viewport: { width: 1280, height: 800 },
     ignoreHTTPSErrors: true,

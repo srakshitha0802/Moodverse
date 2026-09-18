@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { NavLink, Outlet, Link, useLocation } from 'react-router-dom';
+import { zenAudio } from '../utils/zenAudio';
 
 interface LayoutProps {
   userData: any;
@@ -29,10 +30,11 @@ interface MenuCategory {
    ========================================================================== */
 const Icons = {
   Logo: () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 2a8 8 0 0 0-8 8c0 5 8 12 8 12s8-7 8-12a8 8 0 0 0-8-8z" />
-      <circle cx="12" cy="10" r="3" />
-    </svg>
+    <img
+      src="/logo.jpeg"
+      alt="Moodverse Logo"
+      className="brand-logo-img"
+    />
   ),
   Crisis: () => (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -221,6 +223,19 @@ const Icons = {
   Sparkle: () => (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z" />
+    </svg>
+  ),
+  Sound: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+    </svg>
+  ),
+  Breathe: () => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+      <path d="M9 21h6" />
     </svg>
   ),
 };
@@ -412,22 +427,85 @@ const MENU_CATEGORIES: MenuCategory[] = [
 export default function Layout({ userData, onLogout }: LayoutProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [activeSound, setActiveSound] = useState<'432hz' | 'rain' | 'ocean' | 'bowls' | null>(null);
+  const [soundMenuOpen, setSoundMenuOpen] = useState(false);
+  const [stressRescueOpen, setStressRescueOpen] = useState(false);
+  const [breathePhase, setBreathePhase] = useState<'Inhale' | 'Hold' | 'Exhale'>('Inhale');
+  const [breatheSecs, setBreatheSecs] = useState(4);
+  const [completedCycles, setCompletedCycles] = useState(0);
   const location = useLocation();
+
+  // Handle ambient sound changes
+  const toggleSound = (type: '432hz' | 'rain' | 'ocean' | 'bowls') => {
+    if (activeSound === type) {
+      zenAudio.stopAmbient();
+      setActiveSound(null);
+    } else {
+      zenAudio.startAmbient(type, 0.35);
+      setActiveSound(type);
+    }
+  };
+
+  // 4-7-8 Breathing Cycle Timer for Stress Rescue Modal
+  useEffect(() => {
+    if (!stressRescueOpen) return;
+    
+    let timer: any;
+    if (breathePhase === 'Inhale') {
+      zenAudio.playChime(528, 1.5);
+      timer = setInterval(() => {
+        setBreatheSecs(s => {
+          if (s <= 1) {
+            setBreathePhase('Hold');
+            return 7;
+          }
+          return s - 1;
+        });
+      }, 1000);
+    } else if (breathePhase === 'Hold') {
+      timer = setInterval(() => {
+        setBreatheSecs(s => {
+          if (s <= 1) {
+            setBreathePhase('Exhale');
+            zenAudio.playChime(396, 2.0);
+            return 8;
+          }
+          return s - 1;
+        });
+      }, 1000);
+    } else if (breathePhase === 'Exhale') {
+      timer = setInterval(() => {
+        setBreatheSecs(s => {
+          if (s <= 1) {
+            setBreathePhase('Inhale');
+            setCompletedCycles(c => c + 1);
+            return 4;
+          }
+          return s - 1;
+        });
+      }, 1000);
+    }
+
+    return () => clearInterval(timer);
+  }, [stressRescueOpen, breathePhase]);
 
   // Automatically close menu when navigating
   useEffect(() => {
     setMenuOpen(false);
+    setSoundMenuOpen(false);
   }, [location.pathname]);
 
   // Lock body scroll and handle Escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && menuOpen) {
-        setMenuOpen(false);
+      if (e.key === 'Escape') {
+        if (menuOpen) setMenuOpen(false);
+        if (stressRescueOpen) setStressRescueOpen(false);
+        if (soundMenuOpen) setSoundMenuOpen(false);
       }
     };
 
-    if (menuOpen) {
+    if (menuOpen || stressRescueOpen) {
       document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
     } else {
@@ -438,7 +516,7 @@ export default function Layout({ userData, onLogout }: LayoutProps) {
       document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [menuOpen]);
+  }, [menuOpen, stressRescueOpen, soundMenuOpen]);
 
   // Total features count
   const totalItemsCount = useMemo(() => {
@@ -481,6 +559,83 @@ export default function Layout({ userData, onLogout }: LayoutProps) {
 
           {/* Right Actions */}
           <div className="header-right-actions">
+            {/* Quick 1-Tap Stress Rescue Pill */}
+            <button
+              onClick={() => {
+                setStressRescueOpen(true);
+                setBreathePhase('Inhale');
+                setBreatheSecs(4);
+              }}
+              className="header-stress-pill"
+              title="1-Tap Instant 4-7-8 Stress Reliever"
+              aria-label="Instant 4-7-8 Breathing Stress Relief"
+            >
+              <Icons.Breathe />
+              <span>Instant Calm (4-7-8)</span>
+            </button>
+
+            {/* Ambient Zen Sound Dropdown */}
+            <div style={{ position: 'relative' }}>
+              <button
+                className={`header-sound-pill ${activeSound ? 'active' : ''}`}
+                onClick={() => setSoundMenuOpen(!soundMenuOpen)}
+                title="Toggle Ambient Peace Soundscape"
+                aria-label="Toggle Ambient Soundscape"
+              >
+                <Icons.Sound />
+                <span>{activeSound ? `${activeSound.toUpperCase()} Active` : 'Zen Sound'}</span>
+              </button>
+
+              {soundMenuOpen && (
+                <div className="sound-dropdown-card">
+                  <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--text-secondary)', marginBottom: '8px' }}>
+                    Soothing Background Ambiance
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <button
+                      className={`sound-option-btn ${activeSound === '432hz' ? 'selected' : ''}`}
+                      onClick={() => toggleSound('432hz')}
+                    >
+                      <span>🎵 432Hz Miracle Waves</span>
+                      <span className="sound-badge">Alpha State</span>
+                    </button>
+                    <button
+                      className={`sound-option-btn ${activeSound === 'rain' ? 'selected' : ''}`}
+                      onClick={() => toggleSound('rain')}
+                    >
+                      <span>🌧️ Gentle Rain Drops</span>
+                      <span className="sound-badge">Pink Noise</span>
+                    </button>
+                    <button
+                      className={`sound-option-btn ${activeSound === 'ocean' ? 'selected' : ''}`}
+                      onClick={() => toggleSound('ocean')}
+                    >
+                      <span>🌊 Ocean Swell Mist</span>
+                      <span className="sound-badge">Rhythmic</span>
+                    </button>
+                    <button
+                      className={`sound-option-btn ${activeSound === 'bowls' ? 'selected' : ''}`}
+                      onClick={() => toggleSound('bowls')}
+                    >
+                      <span>🥣 Tibetan Singing Bowls</span>
+                      <span className="sound-badge">Harmonic</span>
+                    </button>
+                    {activeSound && (
+                      <button
+                        className="sound-stop-btn"
+                        onClick={() => {
+                          zenAudio.stopAmbient();
+                          setActiveSound(null);
+                        }}
+                      >
+                        ⏹️ Stop Soundscape
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+
             {/* Quick 24/7 Crisis Support Pill */}
             <Link to="/resources" className="header-crisis-pill" title="Emergency 24/7 Lifelines">
               <Icons.Crisis />
@@ -506,6 +661,52 @@ export default function Layout({ userData, onLogout }: LayoutProps) {
           </div>
         </div>
       </header>
+
+      {/* Instant 4-7-8 Stress Rescue Modal */}
+      {stressRescueOpen && (
+        <div className="stress-modal-backdrop" onClick={() => setStressRescueOpen(false)}>
+          <div className="stress-modal-card" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="stress-modal-close"
+              onClick={() => setStressRescueOpen(false)}
+              aria-label="Close Stress Relief Modal"
+            >
+              <Icons.Close />
+            </button>
+            <div className="stress-modal-badge">Instant Nervous System Reset</div>
+            <h2 style={{ fontSize: '24px', fontWeight: '800', marginTop: '10px', color: 'var(--text-primary)' }}>
+              4-7-8 Parasympathetic Calming Breath
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '14px', marginTop: '4px', maxWidth: '440px' }}>
+              Scientifically proven to trigger your vagus nerve and slow heart rate within 60 seconds.
+            </p>
+
+            <div className="stress-breathe-container">
+              <div className={`stress-breathe-orb ${breathePhase.toLowerCase()}`}>
+                <div className="stress-breathe-pulse"></div>
+                <div className="stress-breathe-phase-text">{breathePhase}</div>
+                <div className="stress-breathe-timer">{breatheSecs}s</div>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginTop: '20px' }}>
+              <div className="stress-tip-pill">
+                <strong>Inhale (4s)</strong>: Through nose quietly
+              </div>
+              <div className="stress-tip-pill">
+                <strong>Hold (7s)</strong>: Settle into stillness
+              </div>
+              <div className="stress-tip-pill">
+                <strong>Exhale (8s)</strong>: Slow whoosh through mouth
+              </div>
+            </div>
+
+            <div style={{ marginTop: '20px', fontSize: '13px', color: 'var(--brand-primary)', fontWeight: '600' }}>
+              ✨ Completed Calm Cycles: {completedCycles}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Slide-Over Menu Backdrop */}
       {menuOpen && (
@@ -683,8 +884,10 @@ export default function Layout({ userData, onLogout }: LayoutProps) {
 
           {/* Drawer Footer */}
           <div className="menu-drawer-footer">
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <Icons.Logo />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ width: 22, height: 22, borderRadius: 6, overflow: 'hidden', display: 'inline-flex' }}>
+                <Icons.Logo />
+              </span>
               <span>Moodverse Sanctuary v1.0</span>
             </div>
             <Link
@@ -708,8 +911,10 @@ export default function Layout({ userData, onLogout }: LayoutProps) {
         <div className="container">
           <div className="footer-grid">
             <div className="footer-col">
-              <h3>
-                <Icons.Logo />
+              <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ width: 22, height: 22, borderRadius: 6, overflow: 'hidden', display: 'inline-flex' }}>
+                  <Icons.Logo />
+                </span>
                 <span>About Moodverse</span>
               </h3>
               <p>

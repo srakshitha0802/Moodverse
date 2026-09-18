@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { requestAudioPermission, requestOrientationPermission, isDeviceOrientationSupported, isDeviceMotionSupported } from '../hooks/useCrossBrowserCompatibility';
+import ErrorBoundary from './ErrorBoundary';
+import useGlobalErrorHandler from '../hooks/useGlobalErrorHandler';
 
 /**
  * Generate a unique ID for assets
@@ -106,9 +108,6 @@ function getResponsiveAspectRatio(): string {
 interface VRExperienceProps {
   scene: string;
 }
-
-import ErrorBoundary from './ErrorBoundary';
-import useGlobalErrorHandler from '../hooks/useGlobalErrorHandler';
 
 export default function VRExperience({ scene }: VRExperienceProps) {
   useGlobalErrorHandler();
@@ -464,7 +463,6 @@ export default function VRExperience({ scene }: VRExperienceProps) {
       {!loading && (
         <div className="aframe-scene-container">
           <a-scene 
-            key={sceneKey} 
             embedded 
             vr-mode-ui="enabled: true"
             style={{ width: '100%', height: '100%' }}

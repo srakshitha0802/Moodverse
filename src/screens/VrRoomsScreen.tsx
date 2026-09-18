@@ -11,7 +11,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { WebView } from 'react-native-webview';
 import { Ionicons } from '@expo/vector-icons';
-import { AppHeader } from '../navigation/AppNavigator';
+import { AppHeader } from '../components/AppHeader';
 
 interface Room {
   id: string;

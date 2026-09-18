@@ -105,6 +105,16 @@ const CURATED_ENVIRONMENTS: VRPanorama[] = [
     position: { x: 0, y: 1.6, z: 0 }
   },
   {
+    id: 'zen-park',
+    name: 'Zen Blossom Park',
+    description: 'Tranquil botanical garden with lush greenery and peaceful sunlight filtering through trees',
+    category: 'nature',
+    mood: ['Peace', 'Mindfulness', 'Clarity'],
+    panoramaUrl: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/park.jpg',
+    thumbnailUrl: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/park.jpg',
+    position: { x: 0, y: 1.6, z: 0 }
+  },
+  {
     id: 'alpine-mountains',
     name: 'Alpine Mountains',
     description: 'Snow-capped alpine peaks offering clarity, perspective, and mental strength.',
@@ -114,6 +124,46 @@ const CURATED_ENVIRONMENTS: VRPanorama[] = [
     thumbnailUrl: 'https://pannellum.org/images/alma.jpg',
     position: { x: 0, y: 1.6, z: 0 }
   },
+  {
+    id: 'cerro-toco',
+    name: 'Cerro Toco Horizon',
+    description: 'Expansive high-altitude mountain desert view under vast open celestial skies',
+    category: 'nature',
+    mood: ['Spaciousness', 'Grounding', 'Peace'],
+    panoramaUrl: 'https://pannellum.org/images/cerro-toco.jpg',
+    thumbnailUrl: 'https://pannellum.org/images/cerro-toco.jpg',
+    position: { x: 0, y: 1.6, z: 0 }
+  },
+  {
+    id: 'serene-bridge',
+    name: 'Serene Waterway Bridge',
+    description: 'Gentle water ripples beneath an elegant bridge overlooking quiet reflection ponds',
+    category: 'nature',
+    mood: ['Calm', 'Stillness', 'Rest'],
+    panoramaUrl: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/bridge.jpg',
+    thumbnailUrl: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/bridge.jpg',
+    position: { x: 0, y: 1.6, z: 0 }
+  },
+  {
+    id: 'yokohama-night',
+    name: 'Yokohama Waterfront',
+    description: 'Soothing evening urban lights reflecting softly over quiet coastal waters',
+    category: 'urban',
+    mood: ['Perspective', 'Night Rest', 'Quiet'],
+    panoramaUrl: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/yokohama.jpg',
+    thumbnailUrl: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/yokohama.jpg',
+    position: { x: 0, y: 1.6, z: 0 }
+  },
+  {
+    id: 'cubes-abstract',
+    name: 'Minimal Geometric Sanctum',
+    description: 'Abstract calming 3D cubes floating peacefully in ethereal pastel space',
+    category: 'abstract',
+    mood: ['Focus', 'Creativity', 'Zen'],
+    panoramaUrl: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg',
+    thumbnailUrl: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg',
+    position: { x: 0, y: 1.6, z: 0 }
+  }
 ];
 
 // ============================================================================

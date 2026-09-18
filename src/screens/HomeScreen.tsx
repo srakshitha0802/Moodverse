@@ -10,7 +10,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import { AppHeader } from '../navigation/AppNavigator';
+import { AppHeader } from '../components/AppHeader';
 
 const MOODS = [
   { id: 'happy', icon: 'sunny-outline' as const, label: 'Happy', color: '#0D9488', bg: '#DCFCE7' },
@@ -191,6 +191,42 @@ export default function HomeScreen({ navigation }: any) {
                 </View>
               </View>
               <Text style={styles.cardDesc}>Curated mood-lifting humor, smiles & positivity</Text>
+            </TouchableOpacity>
+
+            {/* Community Circle */}
+            <TouchableOpacity
+              style={styles.gridCard}
+              onPress={() => navigation.navigate('Community')}
+              activeOpacity={0.8}
+            >
+              <View style={[styles.iconCircle, { backgroundColor: '#E0F2FE' }]}>
+                <Ionicons name="people-outline" size={24} color="#0284C7" />
+              </View>
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+                <Text style={styles.cardTitle}>Community</Text>
+                <View style={[styles.pillBadge, { backgroundColor: '#E0F2FE' }]}>
+                  <Text style={[styles.pillBadgeText, { color: '#0369A1' }]}>CARE</Text>
+                </View>
+              </View>
+              <Text style={styles.cardDesc}>Anonymous peer reflections & AI companion chat</Text>
+            </TouchableOpacity>
+
+            {/* Wellness Books */}
+            <TouchableOpacity
+              style={styles.gridCard}
+              onPress={() => navigation.navigate('Books')}
+              activeOpacity={0.8}
+            >
+              <View style={[styles.iconCircle, { backgroundColor: '#DCFCE7' }]}>
+                <Ionicons name="book-outline" size={24} color="#0D9488" />
+              </View>
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+                <Text style={styles.cardTitle}>Reading Hub</Text>
+                <View style={[styles.pillBadge, { backgroundColor: '#DCFCE7' }]}>
+                  <Text style={[styles.pillBadgeText, { color: '#0F766E' }]}>BOOKS</Text>
+                </View>
+              </View>
+              <Text style={styles.cardDesc}>Evidence-based mental wellness book summaries</Text>
             </TouchableOpacity>
           </View>
         </View>

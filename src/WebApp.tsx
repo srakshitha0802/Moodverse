@@ -63,6 +63,7 @@ function WebAppContent() {
             <Route path="mood" element={<MoodScanner />} />
             <Route path="mood-scanner" element={<MoodScanner />} />
             <Route path="meditation" element={<Meditation />} />
+            <Route path="meditate" element={<Meditation />} />
             <Route path="yoga" element={<Yoga />} />
             <Route path="therapy" element={<Therapy />} />
             <Route path="vr" element={<VrRooms />} />

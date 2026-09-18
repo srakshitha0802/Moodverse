@@ -52,7 +52,7 @@ export default function ActivityRecommender({
   const [timeSpent, setTimeSpent] = useState(0);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
     if (isStarted) {
       interval = setInterval(() => {
         setTimeSpent(prev => prev + 1);

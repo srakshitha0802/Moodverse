@@ -8,11 +8,11 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web",
-    "dev": "vite",
+    "web": "expo start --web --port 8100",
+    "dev": "vite --port 8100",
     "build": "vite build",
     "build:expo": "expo export -p web",
-    "preview": "vite preview"
+    "preview": "vite preview --port 8100"
   },
   "dependencies": {
     "@expo/metro-runtime": "^57.0.15",
