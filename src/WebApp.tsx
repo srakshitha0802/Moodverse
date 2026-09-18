@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Therapy from "./pages/Therapy";
 import Community from "./pages/Community";
@@ -56,7 +56,7 @@ function WebAppContent() {
   return (
     <>
       <ConsentManager />
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Layout userData={userData} onLogout={handleLogout} />}>
             <Route index element={<Home />} />
@@ -84,7 +84,7 @@ function WebAppContent() {
             <Route path="chat" element={<MainExperience />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }

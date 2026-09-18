@@ -31,7 +31,7 @@ interface MenuCategory {
 const Icons = {
   Logo: () => (
     <img
-      src="/logo.jpeg"
+      src="./logo.jpeg"
       alt="Moodverse Logo"
       className="brand-logo-img"
     />

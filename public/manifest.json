@@ -4,17 +4,17 @@
   "description": "All-in-one mindfulness and mental wellness platform featuring AI mood detection, 25 anti-stress games, guided breathwork meditation, yoga postures, wholesome memes, and 3D VR sanctuaries.",
   "icons": [
     {
-      "src": "/logo.jpeg",
+      "src": "./logo.jpeg",
       "type": "image/jpeg",
       "sizes": "192x192 512x512"
     },
     {
-      "src": "/assets/icon.png",
+      "src": "./assets/icon.png",
       "type": "image/png",
       "sizes": "192x192 512x512"
     }
   ],
-  "start_url": "/",
+  "start_url": "./",
   "background_color": "#FAF9F6",
   "theme_color": "#FAF9F6",
   "display": "standalone",
