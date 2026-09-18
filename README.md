@@ -199,8 +199,7 @@ npm run build
 ## 👥 Authors & Acknowledgments
 
 - **Lead Developer & Creator**: Semala Rakshitha ([@srakshitha0802](https://github.com/srakshitha0802))
-- **Email**: rakshithasemala@gmail.com
-- **Website**: [moodverse.com](https://moodverse.com)
+- **Email**: srakshitha912@gmail.com
 
 ---
 
